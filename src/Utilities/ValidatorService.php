@@ -2,7 +2,7 @@
 
 namespace App\Utilities;
 
-use App\DTO\Interfaces\RequestDtoInterface;
+use App\DTO\Interfaces\RequestDtoInterfagce;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ValidatorService

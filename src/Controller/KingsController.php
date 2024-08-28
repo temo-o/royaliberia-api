@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\KingsService;
 use App\Utilities\ValidatorService;
+use Exception;
 use Symfony\Component\HttpFoundation\{JsonResponse, Response};
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -19,6 +20,9 @@ class KingsController extends BaseController
         parent::__construct($this->serializer, $this->validator);
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/', name: 'home_index', methods: ['GET'])]
     public function getKings(): Response
     {
@@ -32,7 +36,7 @@ class KingsController extends BaseController
     {
         try{
             $kings = $this->kingsService->getKingsClosure();
-        } catch (\Exception $e){
+        } catch (Exception $e){
             return new JsonResponse(["foo"=>"barerrror"]);
         }
 

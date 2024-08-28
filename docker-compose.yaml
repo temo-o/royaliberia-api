@@ -30,7 +30,7 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=false
       - MYSQL_RANDOM_ROOT_PASSWORD=false
     ports:
-      - 9018:3306
+      - "9018:3306"
 
 ###> doctrine/doctrine-bundle ###
   database:
@@ -54,5 +54,3 @@ services:
 volumes:
   database_data:
 ###> doctrine/doctrine-bundle ###
-  database_data:
-###< doctrine/doctrine-bundle ###
