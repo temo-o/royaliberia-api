@@ -3,16 +3,21 @@
 namespace App\Service;
 
 use App\Repository\KingsRepository;
-use http\Exception;
+use App\Service\Redis\Cache\KingsCacheService;
+use Exception;
+use Psr\Cache\InvalidArgumentException;
 
 class KingsService
 {
-    public function __construct(protected KingsRepository $kingsRepository)
+    public function __construct(
+        protected KingsRepository   $kingsRepository,
+        protected KingsCacheService $kingsCacheService
+    )
     {
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getKings(): array
     {
@@ -20,7 +25,15 @@ class KingsService
     }
 
     /**
-     * @throws \Exception
+     * @throws InvalidArgumentException
+     */
+    public function getKingsFromRedis(): mixed
+    {
+        return $this->kingsCacheService->getKing('');
+    }
+
+    /**
+     * @throws Exception
      */
     public function getKingsClosure(): array
     {
@@ -34,5 +47,13 @@ class KingsService
             );
         }
         return $finalResults;
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function setKingsInRedis(string $id, string $name): void
+    {
+        $this->kingsCacheService->setKing($id, $name);
     }
 }

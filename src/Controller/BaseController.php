@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\DTO\Interfaces\RequestDtoInterface;
-use Symfony\Component\HttpFoundation\{Exception\BadRequestException, Request};
-use Symfony\Component\Serializer\SerializerInterface;
 use App\Utilities\ValidatorService;
-
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class BaseController
 {
@@ -24,7 +24,7 @@ class BaseController
         $requestDto = $this->prepareRequestDto($request, $dto);
         $errors = $this->validator->validateRequest($requestDto);
 
-        if(empty($errors)){
+        if (empty($errors)) {
             return $requestDto;
         }
 
